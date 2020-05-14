@@ -92,20 +92,22 @@
     // Cambio de estilo de Libre a Reservado
     function reserva(elmnt, id) {
         confirmar();
-        if (document.getElementById("btnAceptar").click() == true) {
-            let element = document.getElementById(id);
-            element.style.background = "purple";
-            element.style.color = "white";
-            element.innerHTML = "Reservado";
-            element.style.borderRadius = "0px 50px 50px 0px";
+        $(document).ready(function () {
+            $("#btnAceptar").click(function (i) {
+                let element = document.getElementById(id);
+                element.style.background = "purple";
+                element.style.color = "white";
+                element.innerHTML = "Reservado";
+                element.style.borderRadius = "0px 50px 50px 0px";
 
-            element.previousElementSibling.style.background = "purple";
-            element.previousElementSibling.style.color = "white";
-            element.previousElementSibling.style.borderRadius = "50px 0px 0px 50px";
+                element.previousElementSibling.style.background = "purple";
+                element.previousElementSibling.style.color = "white";
+                element.previousElementSibling.style.borderRadius = "50px 0px 0px 50px";
 
-            elmnt.className = "btn btn-danger btn-sm";
-            elmnt.innerHTML = "Cancelar";
-            cancelar(document.getElementById('aceptarReserva'));
-        }
+                elmnt.className = "btn btn-danger btn-sm";
+                elmnt.innerHTML = "Cancelar";
+                cancelar(document.getElementById('aceptarReserva'));
+            });
+        });
     }
 </script>
