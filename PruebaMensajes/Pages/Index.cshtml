@@ -16,15 +16,20 @@
 </div>
 <br />
 <div class="row">
+    <div class="alert alert-info text-center" style="width: 100%" id="alerta">
+        <p id="mensaje"></p>
+    </div>
+</div>
+<div class="row">
     <div class="alert alert-info text-center invisible" style="width: 33%" id="aceptarReserva">
         <p>¿Quiere reservar una pista de padel a esta hora?</p>
         <a class="btn btn-success" id="btnAceptar">Aceptar</a>
-        <a class="btn btn-danger" onclick="cancelar(document.getElementById('aceptarReserva'))">Cancelar</a>
+        <a class="btn btn-danger" onclick="confirmarSalirSinReservar()">Cancelar</a>
     </div>
     <div class="alert alert-info text-center invisible" style="width: 33%" id="salirSinReservar">
-        <p>¿Quiere reservar una pista de padel a esta hora?</p>
-        <a class="btn btn-success">Aceptar</a>
-        <a class="btn btn-danger">Cancelar</a>
+        <p>¿Quiere salir sin hacer la reserva?</p>
+        <a class="btn btn-success" onclick="cancelar(document.getElementById('salirSinReservar'))">Aceptar</a>
+        <a class="btn btn-danger" onclick="cancelarSalirSinReservar()">Cancelar</a>
     </div>
     <div class="alert alert-info text-center invisible" style="width: 33%" id="cancelarReserva">
         <p>¿Quiere cancelar su reserva?</p>
@@ -93,6 +98,21 @@
     function confirmarCancelacion() {
         let element = document.getElementById("cancelarReserva");
         element.className = "alert alert-info text-center visible";
+    }
+
+    // Hacer visible la alerta de salir sin reservar
+    function confirmarSalirSinReservar() {
+        let element = document.getElementById("salirSinReservar");
+        element.className = "alert alert-info text-center visible";
+        let element2 = document.getElementById("aceptarReserva");
+        element2.className = "alert alert-info text-center invisible";
+    }
+
+    function cancelarSalirSinReservar() {
+        let element = document.getElementById("salirSinReservar");
+        element.className = "alert alert-info text-center invisible";
+        let element2 = document.getElementById("aceptarReserva");
+        element2.className = "alert alert-info text-center visible";
     }
 
     // Cambio de estilo de Libre a Reservado
