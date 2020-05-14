@@ -19,7 +19,7 @@
     <div class="alert alert-info text-center invisible" style="width: 33%" id="aceptarReserva">
         <p>¿Quiere reservar una pista de padel a esta hora?</p>
         <a class="btn btn-success" id="btnAceptar">Aceptar</a>
-        <a class="btn btn-danger" id="btnCancelar" onclick="cancelar(document.getElementById('aceptarReserva'))">Cancelar</a>
+        <a class="btn btn-danger" onclick="cancelar(document.getElementById('aceptarReserva'))">Cancelar</a>
     </div>
     <div class="alert alert-info text-center invisible" style="width: 33%" id="salirSinReservar">
         <p>¿Quiere reservar una pista de padel a esta hora?</p>
@@ -27,9 +27,9 @@
         <a class="btn btn-danger">Cancelar</a>
     </div>
     <div class="alert alert-info text-center invisible" style="width: 33%" id="cancelarReserva">
-        <p>¿Quiere reservar una pista de padel a esta hora?</p>
-        <a class="btn btn-success">Aceptar</a>
-        <a class="btn btn-danger">Cancelar</a>
+        <p>¿Quiere cancelar su reserva?</p>
+        <a class="btn btn-success" id="btnCancelar" >Aceptar</a>
+        <a class="btn btn-danger" onclick="cancelar(document.getElementById('cancelarReserva'))">Cancelar</a>
     </div>
 </div>
 <div style="padding: 4px;
@@ -51,12 +51,12 @@
                 <td>@i:00</td>
                 <td id="@i-h">Libre</td>
                 <td>
-                    <a class="btn btn-success btn-sm" style="color:white" id="@i-btn" onclick="reserva(this, '@i-h')">Reservar</a>
+                    <a class="btn btn-success btn-sm" style="color:white" id="@i-btn1" onclick="reserva(this, '@i-h', '@i-btn2')">Reservar</a>
+                    <a class="btn btn-danger btn-sm invisible" style="color:white" id="@i-btn2" onclick="CancelarReserva(this, '@i-h', '@i-btn1')">Cancelar</a>
                 </td>
             </tr>
         }
     </table>
-
 </div>
 
 
@@ -89,8 +89,14 @@
         elmnt.className = "alert alert-info text-center invisible";
     }
 
+    // Hacer visible la alerta de cancelar reserva
+    function confirmarCancelacion() {
+        let element = document.getElementById("cancelarReserva");
+        element.className = "alert alert-info text-center visible";
+    }
+
     // Cambio de estilo de Libre a Reservado
-    function reserva(elmnt, id) {
+    function reserva(elmnt, id, idbtn) {
         confirmar();
         $(document).ready(function () {
             $("#btnAceptar").click(function (i) {
@@ -104,9 +110,37 @@
                 element.previousElementSibling.style.color = "white";
                 element.previousElementSibling.style.borderRadius = "50px 0px 0px 50px";
 
-                elmnt.className = "btn btn-danger btn-sm";
-                elmnt.innerHTML = "Cancelar";
+                elmnt.className = "btn btn-success btn-sm invisible";
+
+                let element2 = document.getElementById(idbtn);
+                element2.className = "btn btn-danger btn-sm";
+
                 cancelar(document.getElementById('aceptarReserva'));
+            });
+        });
+    }
+
+    // Cambio de estilo de reservado a libre
+    function CancelarReserva(elmnt, id, idbtn) {
+        confirmarCancelacion();
+        $(document).ready(function () {
+            $("#btnCancelar").click(function (i) {
+                let element = document.getElementById(id);
+                element.style.background = "white";
+                element.style.color = "black";
+                element.innerHTML = "Libre";
+                element.style.borderRadius = "50px 0px 0px 50px";
+
+                element.previousElementSibling.style.background = "white";
+                element.previousElementSibling.style.color = "black";
+                element.previousElementSibling.style.borderRadius = "0px 50px 50px 0px";
+
+                elmnt.className = "btn btn-success btn-sm invisible";
+
+                let element2 = document.getElementById(idbtn);
+                element2.className = "btn btn-success btn-sm visible";
+
+                cancelar(document.getElementById('cancelarReserva'));
             });
         });
     }
