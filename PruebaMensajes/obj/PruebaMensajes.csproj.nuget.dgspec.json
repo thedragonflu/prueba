@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\erick\\source\\repos\\PruebaMensajes\\PruebaMensajes\\PruebaMensajes.csproj": {}
+    "C:\\Users\\erick\\Source\\Repos\\thedragonflu\\prueba\\PruebaMensajes\\PruebaMensajes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erick\\source\\repos\\PruebaMensajes\\PruebaMensajes\\PruebaMensajes.csproj": {
+    "C:\\Users\\erick\\Source\\Repos\\thedragonflu\\prueba\\PruebaMensajes\\PruebaMensajes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erick\\source\\repos\\PruebaMensajes\\PruebaMensajes\\PruebaMensajes.csproj",
+        "projectUniqueName": "C:\\Users\\erick\\Source\\Repos\\thedragonflu\\prueba\\PruebaMensajes\\PruebaMensajes.csproj",
         "projectName": "PruebaMensajes",
-        "projectPath": "C:\\Users\\erick\\source\\repos\\PruebaMensajes\\PruebaMensajes\\PruebaMensajes.csproj",
+        "projectPath": "C:\\Users\\erick\\Source\\Repos\\thedragonflu\\prueba\\PruebaMensajes\\PruebaMensajes.csproj",
         "packagesPath": "C:\\Users\\erick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erick\\source\\repos\\PruebaMensajes\\PruebaMensajes\\obj\\",
+        "outputPath": "C:\\Users\\erick\\Source\\Repos\\thedragonflu\\prueba\\PruebaMensajes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

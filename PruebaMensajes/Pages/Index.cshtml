@@ -4,7 +4,108 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container row">
+    <div class="col-6">
+        <h2 class="text-info">Reservas Pistas</h2>
+    </div>
+    <br />
 </div>
+<br />
+<div class="4">
+    <input type="date" id="fecha" />
+</div>
+<br />
+<div class="row">
+    <div class="alert alert-info text-center invisible" style="width: 33%" id="aceptarReserva">
+        <p>¿Quiere reservar una pista de padel a esta hora?</p>
+        <a class="btn btn-success" id="btnAceptar">Aceptar</a>
+        <a class="btn btn-danger" id="btnCancelar" onclick="cancelar(document.getElementById('aceptarReserva'))">Cancelar</a>
+    </div>
+    <div class="alert alert-info text-center invisible" style="width: 33%" id="salirSinReservar">
+        <p>¿Quiere reservar una pista de padel a esta hora?</p>
+        <a class="btn btn-success">Aceptar</a>
+        <a class="btn btn-danger">Cancelar</a>
+    </div>
+    <div class="alert alert-info text-center invisible" style="width: 33%" id="cancelarReserva">
+        <p>¿Quiere reservar una pista de padel a esta hora?</p>
+        <a class="btn btn-success">Aceptar</a>
+        <a class="btn btn-danger">Cancelar</a>
+    </div>
+</div>
+<div style="padding: 4px;
+            width: 100%;
+            height: 550px;
+            overflow: auto;">
+
+    @*Bucle que crea el la tabla con el horario de 9:00 a 21:00*@
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+            <th>Hora</th>
+            <th>Estado</th>
+            <th>Reservas</th>
+        </tr>
+
+        @for (var i = 9; i <= 21; i++)
+        {
+            <tr>
+                <td>@i:00</td>
+                <td id="@i-h">Libre</td>
+                <td>
+                    <a class="btn btn-success btn-sm" style="color:white" id="@i-btn" onclick="reserva(this, '@i-h')">Reservar</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+
+<script>
+    // Formato de la fecha actual
+    var fecha = document.querySelector('input[type="date"]');
+
+    function formatoFecha() {
+        let date = new Date();
+        let year = date.getFullYear().toString();
+        let day = date.getDate().toString();
+        let month = date.getMonth() + 1;
+        if (month < 9) {
+            return year + "-0" + month.toString() + "-" + day;
+        } else {
+            return year + "-" + month + "-" + day;
+        }
+
+    }
+    fecha.value = formatoFecha();
+
+    // Hacer visible la alerta de aceptar reserva
+    function confirmar() {
+        let element = document.getElementById("aceptarReserva");
+        element.className = "alert alert-info text-center visible";
+    }
+
+    // Hacer invisible la alerta de aceptar
+    function cancelar(elmnt) {
+        elmnt.className = "alert alert-info text-center invisible";
+    }
+
+    // Cambio de estilo de Libre a Reservado
+    function reserva(elmnt, id) {
+        confirmar();
+        if (document.getElementById("btnAceptar").click() == true) {
+            let element = document.getElementById(id);
+            element.style.background = "purple";
+            element.style.color = "white";
+            element.innerHTML = "Reservado";
+            element.style.borderRadius = "0px 50px 50px 0px";
+
+            element.previousElementSibling.style.background = "purple";
+            element.previousElementSibling.style.color = "white";
+            element.previousElementSibling.style.borderRadius = "50px 0px 0px 50px";
+
+            elmnt.className = "btn btn-danger btn-sm";
+            elmnt.innerHTML = "Cancelar";
+            cancelar(document.getElementById('aceptarReserva'));
+        }
+    }
+</script>
