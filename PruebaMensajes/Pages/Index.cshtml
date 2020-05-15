@@ -15,34 +15,17 @@
     <input type="date" id="fecha" />
 </div>
 <br />
-<div class="row">
-    <div class="alert alert-info text-center" style="width: 100%" id="alerta">
+<div class="row text-center">
+    <div class="alert alert-info text-center invisible" style="width: 100%" id="alerta">
         <p id="mensaje"></p>
         @*Pensar el tema de los botones*@
         @*Para cambiar el mensaje cambiarlo dentro de los métodos necesarios(bastante más sencillo)*@
-        @*<a class="btn btn-success" id="btnAceptar">Aceptar</a>
-        <a class="btn btn-danger" onclick="confirmarSalirSinReservar()">Cancelar</a>
-        <a class="btn btn-success" onclick="cancelar(document.getElementById('salirSinReservar'))">Aceptar</a>
-        <a class="btn btn-danger" onclick="cancelarSalirSinReservar()">Cancelar</a>
-        <a class="btn btn-success" id="btnCancelar">Aceptar</a>
-        <a class="btn btn-danger" onclick="cancelar(document.getElementById('cancelarReserva'))">Cancelar</a>*@
-    </div>
-</div>
-<div class="row">
-    <div class="alert alert-info text-center invisible" style="width: 33%" id="aceptarReserva">
-        <p>¿Quiere reservar una pista de padel a esta hora?</p>
-        <a class="btn btn-success" id="btnAceptar">Aceptar</a>
-        <a class="btn btn-danger" onclick="confirmarSalirSinReservar()">Cancelar</a>
-    </div>
-    <div class="alert alert-info text-center invisible" style="width: 33%" id="salirSinReservar">
-        <p>¿Quiere salir sin hacer la reserva?</p>
-        <a class="btn btn-success" onclick="cancelar(document.getElementById('salirSinReservar'))">Aceptar</a>
-        <a class="btn btn-danger" onclick="cancelarSalirSinReservar()">Cancelar</a>
-    </div>
-    <div class="alert alert-info text-center invisible" style="width: 33%" id="cancelarReserva">
-        <p>¿Quiere cancelar su reserva?</p>
-        <a class="btn btn-success" id="btnCancelar" >Aceptar</a>
-        <a class="btn btn-danger" onclick="cancelar(document.getElementById('cancelarReserva'))">Cancelar</a>
+        <a class="btn btn-success" id="btnAceptar1">Aceptar</a>
+        <a class="btn btn-success invisible" id="btnAceptar2" onclick="hacerInvisible()">Aceptar</a>
+        <a class="btn btn-success invisible" id="btnAceptar3">Aceptar</a>
+        <a class="btn btn-danger invisible" id="btnCancelar3" onclick="hacerInvisible()">Cancelar</a>
+        <a class="btn btn-danger invisible" id="btnCancelar2" onclick="hacerVisible()">Cancelar</a>
+        <a class="btn btn-danger" id="btnCancelar1" onclick="cambiarSalirSinReservar()">Cancelar</a>
     </div>
 </div>
 <div style="padding: 4px;
@@ -65,7 +48,7 @@
                 <td id="@i-h">Libre</td>
                 <td>
                     <a class="btn btn-success btn-sm" style="color:white" id="@i-btn1" onclick="reserva(this, '@i-h', '@i-btn2')">Reservar</a>
-                    <a class="btn btn-danger btn-sm invisible" style="color:white" id="@i-btn2" onclick="CancelarReserva(this, '@i-h', '@i-btn1')">Cancelar</a>
+                    <a class="btn btn-danger btn-sm invisible" style="color:white" id="@i-btn2" onclick="cancelarReserva(this, '@i-h', '@i-btn1')">Cancelar</a>
                 </td>
             </tr>
         }
@@ -92,44 +75,87 @@
     }
     fecha.value = formatoFecha();
 
-    // Hacer visible la alerta de aceptar reserva
-    function confirmar() {
-        let element = document.getElementById("aceptarReserva");
+    // Hacer visible la alerta
+    function hacerVisible() {
+        let element = document.getElementById("alerta");
         element.className = "alert alert-info text-center visible";
+
+        let msg = document.getElementById("mensaje");
+        msg.innerHTML = "¿Quiere reservar una pista de pádel a esta hora?";
+
+        let btn1 = document.getElementById("btnAceptar1");
+        btn1.className = "btn btn-success";
+
+        let btn2 = document.getElementById("btnCancelar1");
+        btn2.className = "btn btn-danger";
     }
 
-    // Hacer invisible la alerta de aceptar
-    function cancelar(elmnt) {
+    // Hacer invisible la alerta
+    function hacerInvisible() {
+        let elmnt = document.getElementById("alerta");
         elmnt.className = "alert alert-info text-center invisible";
-    }
 
-    // Hacer visible la alerta de cancelar reserva
-    function confirmarCancelacion() {
-        let element = document.getElementById("cancelarReserva");
-        element.className = "alert alert-info text-center visible";
+        let btn1 = document.getElementById("btnAceptar2");
+        btn1.className = "btn btn-success invisible";
+        let btn2 = document.getElementById("btnCancelar2");
+        btn2.className = "btn btn-danger invisible";
+
+        let btn3 = document.getElementById("btnAcepta3");
+        btn3.className = "btn btn-success invisible";
+
+        let btn4 = document.getElementById("btnCancelar3");
+        btn4.className = "btn btn-danger invisible";
     }
 
     // Hacer visible la alerta de salir sin reservar
-    function confirmarSalirSinReservar() {
-        let element = document.getElementById("salirSinReservar");
-        element.className = "alert alert-info text-center visible";
-        let element2 = document.getElementById("aceptarReserva");
-        element2.className = "alert alert-info text-center invisible";
+    function cambiarSalirSinReservar() {
+        let msg = document.getElementById("mensaje");
+        msg.innerHTML = "¿Está seguro de que quiere salir sin hacer la reserva?"
+
+        let btn1 = document.getElementById("btnAceptar2");
+        btn1.className = "btn btn-success";
+
+        let btn2 = document.getElementById("btnCancelar2");
+        btn2.className = "btn btn-danger";
+
+        let btn3 = document.getElementById("btnAceptar1");
+        btn3.className = "btn btn-success invisible";
+
+        let btn4 = document.getElementById("btnCancelar1");
+        btn4.className = "btn btn-danger invisible";
     }
 
-    // Volver a la alerta de confirmar reserva
-    function cancelarSalirSinReservar() {
-        let element = document.getElementById("salirSinReservar");
-        element.className = "alert alert-info text-center invisible";
-        let element2 = document.getElementById("aceptarReserva");
-        element2.className = "alert alert-info text-center visible";
+    // Hacer visible la alerta de cancelar reserva
+    function visibleCancelar() {
+        hacerVisible();
+
+        let msg = document.getElementById("mensaje");
+        msg.innerHTML = "¿Está seguro de que quiere cancelar su reserva?"
+
+        let btn1 = document.getElementById("btnAceptar3");
+        btn1.className = "btn btn-success";
+
+        let btn2 = document.getElementById("btnCancelar3");
+        btn2.className = "btn btn-danger";
+
+        let btn3 = document.getElementById("btnAceptar2");
+        btn3.className = "btn btn-success invisible";
+
+        let btn4 = document.getElementById("btnCancelar2");
+        btn4.className = "btn btn-danger invisible";
+
+        let btn5 = document.getElementById("btnAceptar1");
+        btn5.className = "btn btn-success invisible";
+
+        let btn6 = document.getElementById("btnCancelar1");
+        btn6.className = "btn btn-danger invisible";
     }
 
     // Cambio de estilo de Libre a Reservado
     function reserva(elmnt, id, idbtn) {
-        confirmar();
+        hacerVisible();
         $(document).ready(function () {
-            $("#btnAceptar").click(function (i) {
+            $("#btnAceptar1").click(function (i) {
                 let element = document.getElementById(id);
                 element.style.background = "purple";
                 element.style.color = "white";
@@ -145,16 +171,16 @@
                 let element2 = document.getElementById(idbtn);
                 element2.className = "btn btn-danger btn-sm";
 
-                cancelar(document.getElementById('aceptarReserva'));
+                hacerInvisible();
             });
         });
     }
 
     // Cambio de estilo de reservado a libre
-    function CancelarReserva(elmnt, id, idbtn) {
-        confirmarCancelacion();
+    function cancelarReserva(elmnt, id, idbtn) {
+        visibleCancelar();
         $(document).ready(function () {
-            $("#btnCancelar").click(function (i) {
+            $("#btnAceptar3").click(function (i) {
                 let element = document.getElementById(id);
                 element.style.background = "white";
                 element.style.color = "black";
@@ -170,7 +196,7 @@
                 let element2 = document.getElementById(idbtn);
                 element2.className = "btn btn-success btn-sm visible";
 
-                cancelar(document.getElementById('cancelarReserva'));
+                hacerInvisible();
             });
         });
     }
